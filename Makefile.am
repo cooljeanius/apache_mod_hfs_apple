@@ -55,5 +55,5 @@ install: $(MODULE)
 
 clean:
 	@echo "== Cleaning $(MODULE_NAME) =="
-	-$(RM) -r -f .libs *.la *.lo *.slo *.o
+	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache
 

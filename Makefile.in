@@ -71,8 +71,13 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in $(srcdir)/Makefile.orig.in AUTHORS \
-	COPYING ChangeLog INSTALL NEWS README config.guess config.sub \
-	install-sh missing ltmain.sh
+	COPYING ChangeLog INSTALL NEWS README build-aux/config.guess \
+	build-aux/config.sub build-aux/install-sh build-aux/missing \
+	build-aux/ltmain.sh $(top_srcdir)/build-aux/config.guess \
+	$(top_srcdir)/build-aux/config.sub \
+	$(top_srcdir)/build-aux/install-sh \
+	$(top_srcdir)/build-aux/ltmain.sh \
+	$(top_srcdir)/build-aux/missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/m4/ax_prog_apache.m4 \
@@ -702,7 +707,7 @@ install: $(MODULE)
 
 clean:
 	@echo "== Cleaning $(MODULE_NAME) =="
-	-$(RM) -r -f .libs *.la *.lo *.slo *.o
+	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
