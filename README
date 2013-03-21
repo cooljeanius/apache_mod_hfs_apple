@@ -1,0 +1,30 @@
+mod_hfs_apple Apache module (enforce casing in URLs which need it)
+
+When a <Directory> statement is found in the configuration file (this
+discussion does not apply if .htaccess files are used instead) then
+its directory path is supposed to apply to any URL which URI uses
+that directory. In other words, a <Directory> statement usually
+defines some restrictions and any URL that goes to the targeted
+directory (or its sub-directories) should "follow" those restrictions.
+
+On case-sensitive volumes, a URI must
+always match the actual path, in order for the file to be fetched. Any
+<Directory> statement will consequently be enforced. Because if there
+is a case-mismatch a file-not-found error will be returned and if 
+there is no case-mismatch then relevant <Directory> statements will 
+be walked through while parsing the URI.
+
+On case-insensitive HFS volumes, a URI may
+not always case-match the actual path to the file that needs to be 
+fetched. That means that <Directory> statements may not be walked
+through if a case-mismatch appears in the URI (or in the statement)
+in regards to the actual path stored on disk. Consequently, some
+restrictive statements may be missed but the target file may still be 
+returned as response. In this situation we have a problem: to solve
+it we should refuse such URL that case-mismatches part of the path
+which, if not miscased, would actually make a <Directory> statement
+currently configured applies.
+
+That is what this module does. Consequently, when this module is
+installed, some "pseudo-case-sensitivity" is enforced when Apache 
+deals with case-insensitive HFS volumes.

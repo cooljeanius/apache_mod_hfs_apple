@@ -1,0 +1,16 @@
+*DS_Store*
+*libs/*
+*.la
+*.lo 
+*.slo
+*.so
+*.o
+*~
+*.cache
+*.log
+Makefile
+Makefile.orig
+config.h
+*.status
+libtool
+stamp-h*
