@@ -13,12 +13,18 @@ AC_CANONICAL_HOST
 
 # Checks for programs.
 AC_PROG_CC
+AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PATH_PROG([APXS], [apxs])
-AC_SUBST(APXS)
+AC_SUBST([APXS])
 AX_PROG_APACHE
 AX_PROG_HTTPD
 AX_CHECK_GNU_MAKE
+
+dnl# Next two lines is a hack to prevent libtool checking for CXX/F77
+define([AC_LIBTOOL_LANG_CXX_CONFIG], [:])dnl
+define([AC_LIBTOOL_LANG_F77_CONFIG], [:])dnl
+
 AC_PROG_LIBTOOL
 
 # Checks for libraries.
