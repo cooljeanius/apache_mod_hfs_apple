@@ -4,3 +4,7 @@ build-aux/config.sub linguist-vendored
 build-aux/install-sh linguist-vendored
 build-aux/ltmain.sh linguist-vendored
 build-aux/missing linguist-vendored
+aclocal.m4 linguist-vendored
+Makefile.in linguist-vendored
+m4/libtool.m4 linguist-vendored
+m4/lt*.m4 linguist-vendored
