@@ -16,7 +16,7 @@
 # limitations under the License.
 # 
 
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4 --install
 
 MODULE_NAME = mod_hfs_apple
 MODULE_SRC2 = $(MODULE_NAME)2.c
@@ -29,6 +29,7 @@ INSTALLDIR2 := $(shell $(APXS2) -q LIBEXECDIR)
 MORE_FLAGS = -Wc,"$(RC_CFLAGS) -Wall -Wextra -Os -g"
 MORE_FLAGS += -Wl,"$(RC_CFLAGS)"
 
+MAKEFILEPATH = @DEVELOPER_DIR@/Makefiles
 MAKEFILEDIR = $(MAKEFILEPATH)/pb_makefiles
 include $(MAKEFILEDIR)/platform.make
 include $(MAKEFILEDIR)/commands-$(OS).make
@@ -53,7 +54,7 @@ install: $(MODULE)
 	$(MKDIRS) $(DSTROOT)$(INSTALLDIR2)
 	$(STRIP) -x $(SYMROOT)$(INSTALLDIR2)/$(MODULE) -o $(DSTROOT)$(INSTALLDIR2)/$(MODULE)
 
-clean:
+clean-local:
 	@echo "== Cleaning $(MODULE_NAME) =="
 	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache
 

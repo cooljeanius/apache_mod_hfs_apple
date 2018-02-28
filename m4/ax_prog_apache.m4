@@ -1,5 +1,5 @@
 # ===========================================================================
-#      http://www.gnu.org/software/autoconf-archive/ax_prog_apache.html
+#      https://www.gnu.org/software/autoconf-archive/ax_prog_apache.html
 # ===========================================================================
 #
 # SYNOPSIS
@@ -29,7 +29,7 @@
 #   It defines the symbol APACHE_MODULES if a directory containing mod_env.*
 #   is found in the default server root directory (obtained with httpd -V).
 #
-#   The httpd.conf file listing modules to be loaded dynamicaly can use
+#   The httpd.conf file listing modules to be loaded dynamically can use
 #   @APACHE_MODULES@ to grab them in the appropriate sub directory. For
 #   instance:
 #
@@ -54,7 +54,7 @@
 #   Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License along
-#   with this program. If not, see <http://www.gnu.org/licenses/>.
+#   with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 #   As a special exception, the respective Autoconf Macro's copyright owner
 #   gives unlimited permission to copy, distribute and modify the configure
@@ -69,7 +69,7 @@
 #   modified version of the Autoconf Macro, you may extend this special
 #   exception to the GPL to apply to your modified version as well.
 
-#serial 4
+#serial 7
 
 AU_ALIAS([AC_PROG_APACHE], [AX_PROG_APACHE])
 AC_DEFUN([AX_PROG_APACHE],
@@ -77,8 +77,8 @@ AC_DEFUN([AX_PROG_APACHE],
 # Handle user hints
 #
 [
- AC_MSG_CHECKING([if apache is wanted])
- AC_ARG_WITH([apache],
+ AC_MSG_CHECKING(if apache is wanted)
+ AC_ARG_WITH(apache,
   [  --with-apache=PATH absolute path name of apache server (default is to search httpd in
     /usr/local/apache/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin),
     --without-apache to disable apache detection],
@@ -101,7 +101,7 @@ AC_DEFUN([AX_PROG_APACHE],
     # Run this if nothing was said
     #
     APACHE_WANTED=yes
-    AC_MSG_RESULT([yes])
+    AC_MSG_RESULT(yes)
   ])
   #
   # Now we know if we want apache or not, only go further if
@@ -112,11 +112,11 @@ AC_DEFUN([AX_PROG_APACHE],
     # If not specified by caller, search in standard places
     #
     if test -z "$APACHE" ; then
-      AC_PATH_PROG([APACHE], [httpd], [], [/usr/local/apache/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin])
+      AC_PATH_PROG(APACHE, httpd, , /usr/local/apache/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin)
     fi
     AC_SUBST(APACHE)
     if test -z "$APACHE" ; then
-        AC_MSG_ERROR(["apache server executable not found"]);
+        AC_MSG_ERROR("apache server executable not found");
     fi
     #
     # Collect apache version number. If for nothing else, this
@@ -135,23 +135,22 @@ AC_DEFUN([AX_PROG_APACHE],
     # Check that apache version matches requested version or above
     #
     if test -n "$1" ; then
-      AC_PATH_PROG([EXPR],[expr])
-      AC_MSG_CHECKING([apache version >= $1])
+      AC_MSG_CHECKING(apache version >= $1)
       APACHE_REQUEST=`echo $1 | sed -e 's/\.//g'`
       APACHE_REQUEST_MAJOR=`expr $APACHE_REQUEST : '\(..\)'`
       APACHE_REQUEST_MINOR=`expr $APACHE_REQUEST : '..\(.*\)'`
       if test "$APACHE_MAJOR" -lt "$APACHE_REQUEST_MAJOR" -o "$APACHE_MINOR" -lt "$APACHE_REQUEST_MINOR" ; then
-        AC_MSG_RESULT([no])
-        AC_MSG_ERROR([apache version is $APACHE_READABLE_VERSION])
+        AC_MSG_RESULT(no)
+        AC_MSG_ERROR(apache version is $APACHE_READABLE_VERSION)
       else
-        AC_MSG_RESULT([yes])
+        AC_MSG_RESULT(yes)
       fi
     fi
     #
     # Find out if .so modules are in libexec/module.so or modules/module.so
     #
     HTTP_ROOT=`$APACHE -V | grep HTTPD_ROOT | sed -e 's/.*"\(.*\)"/\1/'`
-    AC_MSG_CHECKING([apache modules])
+    AC_MSG_CHECKING(apache modules)
     for dir in libexec modules
     do
       if test -f $HTTP_ROOT/$dir/mod_env.*
@@ -161,9 +160,9 @@ AC_DEFUN([AX_PROG_APACHE],
     done
     if test -z "$APACHE_MODULES"
     then
-      AC_MSG_RESULT([not found])
+      AC_MSG_RESULT(not found)
     else
-      AC_MSG_RESULT([in $HTTP_ROOT/$APACHE_MODULES])
+      AC_MSG_RESULT(in $HTTP_ROOT/$APACHE_MODULES)
     fi
     AC_SUBST(APACHE_MODULES)
   fi

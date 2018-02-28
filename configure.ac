@@ -1,8 +1,8 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
+dnl#                                               -*- Autoconf -*-
+dnl# Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([mod_hfs_apple], [11])
+AC_INIT([mod_hfs_apple],[11])
 AC_CONFIG_SRCDIR([mod_hfs_apple2.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -15,17 +15,20 @@ AC_CANONICAL_HOST
 AC_PROG_CC
 AC_PROG_CPP
 AC_PROG_INSTALL
-AC_PATH_PROG([APXS], [apxs])
-AC_SUBST([APXS])
+AC_PATH_PROG([APXS],[apxs])
+AC_SUBST([APXS])dnl
 AX_PROG_APACHE
 AX_PROG_HTTPD
 AX_CHECK_GNU_MAKE
+EBG_DEVELOPER_DIR
+AC_SUBST([DEVELOPER_DIR])dnl
 
 dnl# Next two lines is a hack to prevent libtool checking for CXX/F77
-define([AC_LIBTOOL_LANG_CXX_CONFIG], [:])dnl
-define([AC_LIBTOOL_LANG_F77_CONFIG], [:])dnl
+define([AC_LIBTOOL_LANG_CXX_CONFIG],[:])dnl
+define([AC_LIBTOOL_LANG_F77_CONFIG],[:])dnl
 
-AC_PROG_LIBTOOL
+LT_INIT
+LT_LANG([C])dnl
 
 # Checks for libraries.
 
@@ -39,7 +42,8 @@ AC_TYPE_SIZE_T
 
 # Checks for library functions.
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([pathconf])
+AC_CHECK_FUNCS([pathconf])dnl
 
-AC_CONFIG_FILES([Makefile Makefile.orig])
+# Output.
+AC_CONFIG_FILES([Makefile Makefile_orig])
 AC_OUTPUT

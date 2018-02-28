@@ -9,8 +9,9 @@
 *.cache
 *.log
 Makefile
-Makefile.orig
+Makefile*orig
 config.h
 *.status
 libtool
 stamp-h*
+mod_hfs_apple-11/*
