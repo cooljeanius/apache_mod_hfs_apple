@@ -10,7 +10,9 @@
 *.log
 Makefile
 Makefile*orig
+confdefs.h
 config.h
+conftest.*
 *.status
 libtool
 stamp-h*

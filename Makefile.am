@@ -34,7 +34,8 @@ MAKEFILEDIR = $(MAKEFILEPATH)/pb_makefiles
 include $(MAKEFILEDIR)/platform.make
 include $(MAKEFILEDIR)/commands-$(OS).make
 
-all build $(MODULE): $(MODULE_SRC) $(OTHER_SRC)
+all: build
+build $(MODULE): $(MODULE_SRC) $(OTHER_SRC)
 	$(APXS2) -c $(MORE_FLAGS) -o $(MODULE) $(MODULE_SRC2) $(OTHER_SRC)
  
 installsrc:
@@ -58,3 +59,12 @@ clean-local:
 	@echo "== Cleaning $(MODULE_NAME) =="
 	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache || rmdir autom4te.cache
 
+check-local: $(MODULE)
+	@echo "MODULE is $(MODULE)"
+	if test -e $(MODULE); then \
+	  stat $(MODULE) && du $(MODULE); \
+	elif test -d .libs && test -r .libs; then \
+	  stat .libs/$(MODULE) && du .libs/$(MODULE); \
+	elif test -x "`which find`"; then \
+	  find . -name $(MODULE) -print; \
+	fi
