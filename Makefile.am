@@ -46,7 +46,7 @@ installsrc:
 installhdrs:
 	@echo "Installing header files..."
 
-install: $(MODULE)
+install-exec-local: $(MODULE)
 	@echo "Installing Apache 2.2 module..."
 	$(MKDIRS) $(SYMROOT)$(INSTALLDIR2)
 	$(CP) .libs/$(MODULE) $(SYMROOT)$(INSTALLDIR2)
@@ -56,5 +56,5 @@ install: $(MODULE)
 
 clean-local:
 	@echo "== Cleaning $(MODULE_NAME) =="
-	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache
+	-$(RM) -r -f .libs *.la *.lo *.slo *.o *~ *.cache || rmdir autom4te.cache
 
