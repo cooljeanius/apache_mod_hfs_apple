@@ -5182,8 +5182,8 @@ printf "%s\n" "in $HTTP_ROOT/$APACHE_MODULES" >&6; }
 
 
 
-# Extract the first word of "httpd$EXEEXT", so it can be a program name with args.
-set dummy httpd$EXEEXT; ac_word=$2
+# Extract the first word of "httpd${EXEEXT}", so it can be a program name with args.
+set dummy httpd${EXEEXT}; ac_word=$2
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 printf %s "checking for $ac_word... " >&6; }
 if test ${ac_cv_path_HTTPD+y}
@@ -5229,7 +5229,7 @@ printf "%s\n" "no" >&6; }
 fi
 
 
-if test "$HTTPD" = nocommand; then
+if test "x${HTTPD}" = "xnocommand"; then
         as_fn_error $? "httpd not found in $PATH" "$LINENO" 5
 fi
 HTTPD_ROOT=`httpd -V | grep HTTPD_ROOT | sed 's/^.*HTTPD_ROOT[[:blank:]]*=[[:blank:]]*"\(.*\)"$/\1/'`
@@ -5242,16 +5242,16 @@ HTTPD_USER_PATTERN='^User[[:blank:]][[:blank:]]*\([^[:blank:]][^[:blank:]]*\)$'
 HTTPD_GROUP_PATTERN='^Group[[:blank:]][[:blank:]]*\([^[:blank:]][^[:blank:]]*\)$'
 DOCUMENT_ROOT_PATTERN='^[[:blank:]]*DocumentRoot[[:blank:]][[:blank:]]*"\([^"]*\)"$'
 SCRIPT_ALIAS_PATTERN='^[[:blank:]]*ScriptAlias[[:blank:]][[:blank:]]*[^[:blank:]][^[:blank:]]*[[:blank:]][[:blank:]]*"\([^"]*\)"$'
-as_ac_File=`printf "%s\n" "ac_cv_file_$HTTPD_SERVER_CONFIG_FILE" | sed "$as_sed_sh"`
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $HTTPD_SERVER_CONFIG_FILE" >&5
-printf %s "checking for $HTTPD_SERVER_CONFIG_FILE... " >&6; }
+as_ac_File=`printf "%s\n" "ac_cv_file_${HTTPD_SERVER_CONFIG_FILE}" | sed "$as_sed_sh"`
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for ${HTTPD_SERVER_CONFIG_FILE}" >&5
+printf %s "checking for ${HTTPD_SERVER_CONFIG_FILE}... " >&6; }
 if eval test \${$as_ac_File+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
   e) test "$cross_compiling" = yes &&
   as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$HTTPD_SERVER_CONFIG_FILE"; then
+if test -r "${HTTPD_SERVER_CONFIG_FILE}"; then
   eval "$as_ac_File=yes"
 else
   eval "$as_ac_File=no"
@@ -5269,7 +5269,7 @@ then :
                 HTTPD_DOC_HOME=`grep $DOCUMENT_ROOT_PATTERN $HTTPD_SERVER_CONFIG_FILE | head -n 1 | sed "s/$DOCUMENT_ROOT_PATTERN/\1/" | sed s/[/]$//`;
                 HTTPD_SCRIPT_HOME=`grep $SCRIPT_ALIAS_PATTERN $HTTPD_SERVER_CONFIG_FILE | head -n 1 | sed "s/$SCRIPT_ALIAS_PATTERN/\1/" | sed s/[/]$//`
 else case e in #(
-  e) as_fn_error $? "httpd server-config-file (detected as $HTTPD_SERVER_CONFIG_FILE by httpd -V) cannot be found" "$LINENO" 5 ;;
+  e) as_fn_error $? "httpd server-config-file (detected as ${HTTPD_SERVER_CONFIG_FILE} by httpd -V) cannot be found" "$LINENO" 5 ;;
 esac
 fi
 
